@@ -1,11 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reusable Card Component</title>
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 20px 0;
+      padding: 16px;
+      background-color: #f9f9f9;
+      width: 300px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .card-content {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
-    
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    function Card({ title, children }) {
+      return (
+        <div className="card">
+          <h2 className="card-title">{title}</h2>
+          <div className="card-content">{children}</div>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <Card title="Card One">
+            <p>This is the content of Card One.</p>
+          </Card>
+
+          <Card title="Card Two">
+            <ul>
+              <li>Learn React</li>
+              <li>Practice Components</li>
+            </ul>
+          </Card>
+
+          <Card title="Card Three">
+            <img src="https://via.placeholder.com/150" alt="Example" />
+          </Card>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
 </body>
 </html>
