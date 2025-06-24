@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch and Display</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function App() {
+
+        const [loading,setLoading] = React.useState(false);
+        const [error,setError] = React.useState('');
+          async function fetchProducts(){
+              try {
+                    setLoading(true)
+                  let response = await axios.get('https://fakestoreapi.com/products');
+                  const data = response.data
+                  console.log("Data",data)
+
+              } catch (error) {
+                    setError(error.message)
+                  console.log(error)
+          }
+          finally{
+            setLoading(false)
+          }
+        };
+
+           return(
+              <div>
+                  <h2>Fetch and Display Product</h2>
+                  <button onClick = {fetchProducts}>Fetch Products</button>
+                  {
+                    loading &&
+                    <div className = "loading">
+                        Loading ...
+                    </div>
+                  }
+                  {
+                    error &&
+                    <div className = "error">
+                        Error : {error}
+                    </div>
+                  }
+              </div>
+          );
+     }
+
+
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App/>)
+    </script>
+  </body>
+</html>
